@@ -1,14 +1,29 @@
-
-#rightColumn {
-    display: block;
-    flex-basis: 0;
-    flex-grow: 1;
-    flex-shrink: 1;
-    padding: 1.75rem;
+  
+* {
+	box-sizing: border-box;
+	margin: 0;
 }
 
-#columnCity {
-border-style: solid;
-border-color: grey;
-border-width: .1rem;
+header {
+	text-align: center;
+	color: white;
+	padding: 20px;
+	background-color: grey;
+}
+
+#city-info {
+	margin: 10px;
+}
+
+.sidebar {
+	background-color: lightgray;
+	padding: 10px;
+}
+
+.daycard {
+	margin: 10px;
+}
+
+header {
+ background-color: navy;
 }

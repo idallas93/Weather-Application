@@ -1,12 +1,15 @@
-var APIKey = "e8f89c7f6e46ebcce4956f65813111a9";
-var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=Bujumbura,Burundi&appid=" + APIKey;
+var APIkey = "e8f89c7f6e46ebcce4956f65813111a9"
+var previousCitySearched = ""
+var storedCities = ""
+var cities = []
+var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=Bujumbura,Burundi&appid=" + APIkey;
 
 // We then created an AJAX call
 $.ajax({
     url: queryURL,
     method: "GET"
-  }).then(function(response) {
-
+   }).then(function(response) {
+    
     // Create CODE HERE to Log the queryURL
     console.log(queryURL)
     // Create CODE HERE to log the resulting object
@@ -27,12 +30,13 @@ $.ajax({
       $("body").append(windHeader)
     var humidityHeader = $("<p>").text(humidity);
       $("body").append(humidityHeader)
-
+    
     // Create and save references to 3 td elements containing the Title, Year, and Actors from the AJAX response object
     // var movieTitle = $("<td>").text(response.Title);
     // var movieYear = $("<td>").text(response.Year);
     // var movieActors = $("<td>").text(response.Actors);
     // Hint: To convert from Kelvin to Fahrenheit: F = (K - 273.15) * 1.80 + 32
     // Create CODE HERE to dump the temperature content into HTML
-
-  });
+    
+   });
+   

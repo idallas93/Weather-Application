@@ -1,130 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <title>Weather Application</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Dashboard</title>
+
+    <script
+      src="https://kit.fontawesome.com/9d317aec20.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <section id="header" class="hero is-dark is-small">
-        <div class="hero-body">
-          <div class="container">
-            <h1 class="title">
-              Weather Dashboard
-            </h1>
+    <header>
+      <h1>Weather Dashboard</h1>
+    </header>
+    <!-- Sidebar for city search -->
+    <div class="row container-fluid">
+      <div class="col-3 sidebar">
+        <h3>Search for a City:</h3>
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            id="city-input"
+            class="form-control"
+            placeholder="City Name"
+            aria-describedby="search-city"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              id="search-city"
+            >
+              <i class="fas fa-search"></i>
+            </button>
           </div>
         </div>
-      </section>
-      <div class="columns">
-        <div id="leftColumn" class="column is-one-third">
-            <label class="label is-one-third">Search for a city:</label>
-            <div class="field is-grouped">
-                <p class="control is-expanded">
-                  <input class="input" type="text" placeholder="Find a repository">
-                </p>
-                <p class="control">
-                  <a class="button is-info">
-                    Search
-                  </a>
-                </p>
-            </div>
-        <div id="columnCity" class="column"><a class="button is-focused">Atlanta</a></div>
-        <div id="columnCity" class="column"><a class="button is-focused">Chicago</a></div>
-        <div id="columnCity" class="column"><a class="button is-focused">New York</a></div>
-        <div id="columnCity" class="column"><a class="button is-focused">Orlando</a></div>
-        <div id="columnCity" class="column"><a class="button is-focused">San Francisco</a></div>
-        <div id="columnCity" class="column"><a class="button is-focused">Seattle</a></div>
-        <div id="columnCity" class="column"><a class="button is-focused">Denver</a></div>
-        <div id="columnCity" class="column"><a class="button is-focused">Atlanta</a></div>
+        <ul class="list-group" id="city-list"></ul>
       </div>
-    <div id="rightColumn" class="columns is-offset-one-third">
-        <div class="tile is-parent">
-            <article class="tile is-child box">
-                 <div id="cityTitle" class="title">Wide column</div>
-                 <p id="temperatureTitle" class="subtitle">Aligned with the right column</p>
-                 <p id="humidityTitle" class="subtitle">Aligned with the right column</p>
-                 <p id="windspeedTitle" class="subtitle">Aligned with the right column</p>
-                 <p id="uvIndexTitle" class="subtitle">Aligned with the right column</p>
+      <!-- Render city data here -->
+      <div class="col" id="city-info">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text" id="temperature"></p>
+            <p class="card-text" id="humidity"></p>
+            <p class="card-text" id="wind-speed"></p>
+            <p class="card-text" id="uv-index"></p>
+          </div>
+        </div>
+          <h3>5-Day Forecast</h3>
+          <div class="row row-cols-3" id="forecast"></div>
+        </div>
+      </div>
+    </div>
+    <!-- Render Daily Forcast here -->
 
-                 <div class="content">
-                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
-                </div>
-              <div class="tile is-ancestor">
-                <div class="tile is-parent">
-                  <article class="tile is-child box">
-                    <p class="title">One</p>
-                    <p class="subtitle">Subtitle</p>
-                  </article>
-                </div>
-                <div class="tile is-parent">
-                  <article class="tile is-child box">
-                    <p class="title">Two</p>
-                    <p class="subtitle">Subtitle</p>
-                  </article>
-                </div>
-                <div class="tile is-parent">
-                  <article class="tile is-child box">
-                    <p class="title">Three</p>
-                    <p class="subtitle">Subtitle</p>
-                  </article>
-                </div>
-                <div class="tile is-parent">
-                  <article class="tile is-child box">
-                    <p class="title">Four</p>
-                    <p class="subtitle">Subtitle</p>
-                  </article>
-                </div>
-              </div>
-            </article>
-         </div>
-     </div>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-     <script type="text/javascript">
-    var APIKey = "e8f89c7f6e46ebcce4956f65813111a9";
-
-// Here we are building the URL we need to query the database
-var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=Bujumbura,Burundi&appid=" + APIKey;
-
-// We then created an AJAX call
-$.ajax({
-  url: queryURL,
-  method: "GET"
-}).then(function(response) {
-
-  // Create CODE HERE to Log the queryURL
-  console.log(queryURL)
-  // Create CODE HERE to log the resulting object
-  console.log(response)
-  // Create CODE HERE to calculate the temperature (converted from Kelvin)
-  var cityName = response.name
-  var windSpeed = response.wind.speed
-  var humidity = response.main.humidity
-  var temp = response.main.temp
-  var tempF = Math.round(((temp-273.15) * 1.80 +32))
-  console.log(temp)
-  // Create CODE HERE to transfer content to HTML
-  var cityNameHeader = $("<h2>").text(cityName);
-    $("body").append(cityNameHeader);
-  var tempHeader = $("<p>").text(tempF);
-    $("body").append(tempHeader);
-  var windHeader = $("<p>").text(windSpeed);
-    $("body").append(windHeader)
-  var humidityHeader = $("<p>").text(humidity);
-    $("body").append(humidityHeader)
-
-  // Create and save references to 3 td elements containing the Title, Year, and Actors from the AJAX response object
-  // var movieTitle = $("<td>").text(response.Title);
-  // var movieYear = $("<td>").text(response.Year);
-  // var movieActors = $("<td>").text(response.Actors);
-  // Hint: To convert from Kelvin to Fahrenheit: F = (K - 273.15) * 1.80 + 32
-  // Create CODE HERE to dump the temperature content into HTML
-
-});
-    
-    
-    </script>
-   </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="script.js"></script>
+    <!-- <script src="config.js"></script> -->
+  </body>
 </html>
