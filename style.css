@@ -1,0 +1,14 @@
+
+#rightColumn {
+    display: block;
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding: 1.75rem;
+}
+
+#columnCity {
+border-style: solid;
+border-color: grey;
+border-width: .1rem;
+}
