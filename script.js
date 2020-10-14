@@ -1,17 +1,31 @@
 var APIkey = "e8f89c7f6e46ebcce4956f65813111a9"
 var storedCities;
 var cities = JSON.parse(localStorage.getItem("cities")) || [];
+var uniqueCities = [];
+$.each(cities, function(i, el){
+    if($.inArray(el,uniqueCities) === -1) uniqueCities.push(el);
+});
 var cityURL = "";
 
 
-var cityNameHeader = $("<h2>")
+var cityNameHeader = $("<h2>");
 $(".card-body").append(cityNameHeader);
 var tempHeader = $("<p>")
 $(".card-body").append(tempHeader);
-var windHeader = $("<p>")
-$(".card-body").append(windHeader)
-var humidityHeader = $("<p>")
-$(".card-body").append(humidityHeader)
+var windHeader = $("<p>");
+$(".card-body").append(windHeader);
+var humidityHeader = $("<p>");
+$(".card-body").append(humidityHeader);
+
+// load previous items from local storage and add the next one after a city is added 
+
+
+for (var i = 0; i < uniqueCities.length; i++){
+    var mostRecentSearch = uniqueCities.length - 1; 
+    var lastSearch = uniqueCities[mostRecentSearch];
+    console.log(lastSearch)
+}
+// add loops that exist to an HTML element/ create a button or anchor tag to allow a click that triggers another AJAX call
 
 $("#search-city").on("click", function(){
   cityURL = $("#city-input").val()
@@ -23,16 +37,22 @@ cities.push(cityURL)
     url: queryURL,
     method: "GET"
    }).then(function(response) {
-    // Create CODE HERE to log the resulting object
-    // Create CODE HERE to calculate the temperature (converted from Kelvin)
+   
+    // Create variables for main card body to add weather information about the city. 
     var cityName = response.name;
     var temp = response.main.temp;
     var humidity = response.main.humidity;
     var windSpeed = response.wind.speed;
-    // var uvIndex = response.current.uvi;
     var tempF = Math.round(((temp-273.15) * 1.80 +32))
-    console.log(temp)
-    console.log(response)
+    // Add list items to side bar when you search for a new city
+    var cityItem = $("<li>");
+    cityItem.addClass("list-group-item city-item");
+    cityItem.text(response.name);
+    cityItem.attr("lat", response.coord.lat);
+    cityItem.attr("lon", response.coord.lon);
+    $("#city-list").prepend(cityItem);
+
+
     // Create CODE HERE to transfer content to HTML
     cityNameHeader.text(cityName);
     tempHeader.text("Temperature: " + tempF + "°");
@@ -40,18 +60,8 @@ cities.push(cityURL)
     humidityHeader.text("Humidity: " + humidity);
     // Local storage set 
     localStorage.setItem("cities", JSON.stringify(cities))
-    
-    // Create and save references to 3 td elements containing the Title, Year, and Actors from the AJAX response object
-    // var movieTitle = $("<td>").text(response.Title);
-    // var movieYear = $("<td>").text(response.Year);
-    // var movieActors = $("<td>").text(response.Actors);
-    // Hint: To convert from Kelvin to Fahrenheit: F = (K - 273.15) * 1.80 + 32
-    // Create CODE HERE to dump the temperature content into HTML
-
-
-    // five day forcast create seperate AJAX API 
    });
    
-  console.log(cityURL)
-})
+   var queryURL2 = "api.openweathermap.org/data/2.5/forecast?q=" + cityURL + "&units=imperial&cnt=42" + "appid=" + APIkey
+   })
 // We then created an AJAX call
