@@ -6,13 +6,6 @@ View the application by following this link:
 
 **[Github working page](https://idallas93.github.io/WeatherApplication-/)** 
 
-## User Story
-
-```
-AS A traveler
-
-```
-
 ## Acceptance Criteria
 
 ```
