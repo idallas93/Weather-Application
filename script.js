@@ -66,10 +66,45 @@ var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q="+cityURL+"&u
 $.ajax({
   url: queryURL,
   method: "GET"
- }).then(function(response) {
-   console.log(response)
+ }).then(function(forecast) {
+   console.log(forecast);
+   var forecastDiv = $("<div  id='fiveDayForecast'>");
+   var forecastHeader = $("<h5 class='card-header border-secondary'>").text("5 Day Forecast");
+   forecastDiv.append(forecastHeader);
+   var cardDeck = $("<div  class='card-deck'>");
+   forecastDiv.append(cardDeck);
+ 
+   for (i=0; i<5; i++) {
+    var forecastCard = $("<div class='card mb-3 mt-3'>");
+    var cardBody = $("<div class='card-body'>");
+    var date = new Date();
+    var val=(date.getMonth()+1)+"/"+(date.getDate()+i+1)+"/"+date.getFullYear();
+    var forecastDate = $("<h5 class='card-title'>").text(val);
+    cardBody.append(forecastDate);
+    var getCurrentWeatherIcon = forecast.list[i].weather[0].icon;
+    console.log(getCurrentWeatherIcon);
+    var displayWeatherIcon = $("<img src = http://openweathermap.org/img/wn/" + getCurrentWeatherIcon + ".png />");
+    cardBody.append(displayWeatherIcon);
+    var getTemperature = forecast.list[i].main.temp;
+    var temperatureElement = $("<p class='card-text'>").text("Temp: "+getTemperature+"° F");
+    cardBody.append(temperatureElement);
+    var getHumidity = forecast.list[i].main.humidity;
+    var humidityElement = $("<p class='card-text'>").text("Humidity: "+getHumidity+"%");
+    cardBody.append(humidityElement);
+    forecastCard.append(cardBody);
+    cardDeck.append(forecastCard);
+}     $("#forecast").html(forecastDiv);    
+
 
  });
 
+ function historyDisplayWeather(){
+  cityName = $(this).attr("data-name");
+  displayWeather();
+  displayFiveDayForecast();
+  console.log(cityName);
+}
 
+// Create on.click for when user selects a city that resides in their previous search history
+$(document).on("click", ".city", historyDisplayWeather);
 })
