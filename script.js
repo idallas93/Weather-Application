@@ -23,7 +23,6 @@ $(".card-body").append(humidityHeader);
 for (var i = 0; i < uniqueCities.length; i++){
     var mostRecentSearch = uniqueCities.length - 1; 
     var lastSearch = uniqueCities[mostRecentSearch];
-    console.log(lastSearch)
 }
 // add loops that exist to an HTML element/ create a button or anchor tag to allow a click that triggers another AJAX call
 
@@ -61,7 +60,16 @@ cities.push(cityURL)
     // Local storage set 
     localStorage.setItem("cities", JSON.stringify(cities))
    });
-   
-   var queryURL2 = "api.openweathermap.org/data/2.5/forecast?q=" + cityURL + "&units=imperial&cnt=42" + "appid=" + APIkey
-   })
-// We then created an AJAX call
+
+// //    five day forecast
+var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q="+cityURL+"&units=imperial&appid=" + "e8f89c7f6e46ebcce4956f65813111a9";
+$.ajax({
+  url: queryURL,
+  method: "GET"
+ }).then(function(response) {
+   console.log(response)
+
+ });
+
+
+})
