@@ -6,8 +6,8 @@ View the application by following this link:
 
 **[Github working page](https://idallas93.github.io/WeatherApplication-/)** 
 
-![weatherappscreenshot] (http://Assets/dashboard.png)
-
+### Home page
+![home page](./Assets/dashboard.png)
 ## Acceptance Criteria
 
 ```
