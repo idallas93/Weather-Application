@@ -26,7 +26,7 @@ for (var i = 0; i < uniqueCities.length; i++){
     var lastSearch = uniqueCities[mostRecentSearch];
 }
 // on click function to trigger search for current weather in a city
-$("#search-city").on("click", function(){
+$("#search-city").on("click", function displayWeather(){
   cityURL = $("#city-input").val()
 //   add city URL to cities array
 cities.push(cityURL)
@@ -139,17 +139,13 @@ $.ajax({
     cardDeck.append(forecastCard);
 }     $("#forecast").html(forecastDiv);    
 
-
  });
 
-// // click search history buttons to show weather for previous searches 
-//  function historyDisplayWeather(){
-//   cityName = $(this).attr("data-name");
-//   displayWeather();
-//   displayFiveDayForecast();
-//   console.log(cityName);
-// }
+// click search history buttons to show weather for previous searches 
+
+$(".list-group-item city-item").on("click", function displayWeather(){
+}
 
 // // Create on.click for when user selects a city that resides in their previous search history
 // $(document).on("click", ".city", historyDisplayWeather);
-})
+)})
