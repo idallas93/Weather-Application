@@ -139,11 +139,12 @@ $.ajax({
     cardDeck.append(forecastCard);
 }     $("#forecast").html(forecastDiv);    
 
+
  });
 
 // click search history buttons to show weather for previous searches 
-
 $(".list-group-item city-item").on("click", function displayWeather(){
+  cityName = $(this).attr("data-name");
 }
 
 // // Create on.click for when user selects a city that resides in their previous search history
