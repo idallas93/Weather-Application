@@ -4,7 +4,7 @@ User can see the weather outlook for multiple cities by searching for the city i
 
 View the application by following this link: 
 
-**[Github working page](https://idallas93.github.io/WeatherApplication-/)** 
+**[Deployed Link](https://idallas93.github.io/Weather-Application/)** 
 
 ### Home page
 ![home page](./Assets/dashboard.png)
